@@ -1,0 +1,58 @@
+{
+  "name": "@riboseinc/iso15924-codes",
+  "version": "0.0.1-dev",
+  "description": "Codes for ISO 15924",
+  "type": "module",
+  "scripts": {
+    "prepare": "ts-patch install -s; husky install",
+    "updatecodes:iso15924": "wget https://www.unicode.org/iso15924/iso15924.txt",
+    "preinstall": "npx only-allow pnpm",
+    "diagnose": "tsc --pretty --diagnostics",
+    "typecheck": "tsc --pretty --noEmit",
+    "build:decl": "tsc --pretty --emitDeclarationOnly",
+    "build:decl:watch": "pnpm run build:decl --watch",
+    "tsc --pretty": "tsc",
+    "build": "pnpm run build:cjs",
+    "prebuild": "rm -rf ${npm_package_dist_dir}/; mkdir ${npm_package_dist_dir}/; cp package.json ${npm_package_dist_dir}/;",
+    "prebuild:watch": "pnpm run prebuild",
+    "build:cjs": "swc ${npm_package_src_dir} --strip-leading-paths --sync --ignore '*.test.*' --out-dir ${npm_package_dist_dir} --copy-files --extensions '.ts,.tsx,.js,.jsx'",
+    "build:watch": "pnpm run build --watch",
+    "dist": "concurrently npm:build npm:build:decl",
+    "dist:watch": "concurrently npm:build:watch npm:build:decl:watch",
+    "build-typecheck": "concurrently npm:build npm:typecheck",
+    "clean-build": "pnpm run clean; pnpm run build",
+    "clean-build-typecheck": "pnpm run clean; pnpm run build-typecheck",
+    "lint": "eslint ${npm_package_src_dir}/ --ext .ts,.tsx",
+    "clean": "rimraf ${npm_package_dist_dir}/* *.tsbuildinfo",
+    "lint-typecheck": "concurrently npm:lint npm:typecheck",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "bump": "pnpm version --message \"chore: Release v%s\n\nCommand used: pnpm bump %s\" --new-version ",
+    "bump:dev": "pnpm version --new-version prerelease --preid dev --message \"chore: Release v%s\n\nCommand used: pnpm bump:dev\"",
+    "fix": "pnpm run lint --fix"
+  },
+  "src_dir": "src",
+  "dist_dir": "dist",
+  "files": [
+    "dist"
+  ],
+  "main": "index.js",
+  "types": "index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "^1.6.7",
+    "@swc/helpers": "^0.5.11",
+    "@swc/jest": "^0.2.36",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+# shellcheck disable=SC2120
+set -euo pipefail
+
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+DATA_DIR="${DATA_DIR:-${SCRIPT_DIR}/../src/data}"
+
+HEADERS_JSON="${DATA_DIR}"/iso3166-headers.json
+ROWS_JSON="${DATA_DIR}"/iso3166-rows.json
+
+extract_headers() {
+  local file=${1:-"${DATA_DIR}"/iso3166-raw.json}
+  jq < "${file:?Missing JSON file}" .uidl -r | \
+    jq '
+      .state.["1165"].header.rows[0].cells
+      | to_entries
+      | map(.key = (.key|tonumber))
+      | sort
+      | [.[].value.text]'
+}
+
+extract_rows() {
+  local file1=${1:-"${DATA_DIR}"/iso3166-raw.json}
+  local file2=${2:-"${DATA_DIR}"/iso3166-raw2.json}
+
+  local rows1="${DATA_DIR}"/iso3166-rows-1.json
+  local rows2="${DATA_DIR}"/iso3166-rows-2.json
+
+  jq < "${file1:?Missing JSON file}" '.uidl' -r | \
+    jq -c '.rpc[4][3][1]' \
+    > "${rows1}"
+
+  jq < "${file2:?Missing JSON file}" '.[0].rpc[0][3][1]' -c \
+    > "${rows2}"
+
+  jq \
+    --slurpfile ary1 "${rows1}" \
+    --slurpfile ary2 "${rows2}" \
+    --slurpfile headers "${HEADERS_JSON}" \
+    -n '[ $ary1 + $ary2
+      | [.[][]]
+      | map(.d)
+      | .[]
+      | [ ($headers|.[]), map(values) ]''
+      | transpose
+      | map( {(.[0]): .[1]} )
+      | add ]'
+}
+
+doit() {
+  extract_headers \
+    > "${HEADERS_JSON}"
+
+  extract_rows \
+    > "${ROWS_JSON}"
+}
+
+main() {
+  if [[ $# -eq 0 ]]
+  then
+    doit
+  else
+    "$@"
+  fi
+}
+
+main "$@"

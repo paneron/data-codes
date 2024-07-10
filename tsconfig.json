@@ -1,0 +1,53 @@
+{
+  "compilerOptions" : {
+    "composite" : true,
+    "sourceMap" : true,
+    "declaration" : true,
+    "declarationMap" : true,
+    "target" : "esnext",
+    "module" : "esnext",
+    "lib": ["ESNext"],
+    "moduleResolution" : "node",
+    "moduleDetection" : "force",
+    "isolatedModules" : true,
+    "esModuleInterop" : true,
+    "noImplicitAny" : true,
+    "noImplicitOverride" : true,
+    "noErrorTruncation" : true,
+    "noUncheckedIndexedAccess": true,
+    "allowSyntheticDefaultImports" : true,
+    "allowJs" : true,
+    "resolveJsonModule" : true,
+    "strict" : true,
+    "skipLibCheck" : true,
+    "incremental" : true,
+    "experimentalDecorators" : true,
+    "exactOptionalPropertyTypes" : false,
+    "verbatimModuleSyntax": true,
+
+    "outDir" : "dist",
+    "typeRoots" : [
+      "./src/@types",
+      "./node_modules/@types"
+    ],
+    "jsx" : "react",
+    "newLine" : "lf"
+  },
+  "include" : [
+    "*.ts",
+    "**/*"
+  ],
+  "exclude" : [
+    "node_modules",
+    "**/*.test.ts",
+    "*.test.ts",
+    "dist"
+  ],
+  "ts-node" : {
+    "swc" : true,
+    "compilerOptions" : {
+      "module" : "CommonJS"
+    },
+    "files" : true
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "@riboseinc/data-codes",
+  "version": "0.0.1",
+  "description": "Repository for standard data codes",
+  "repository": "https://github.com/riboseinc/data-codes",
+  "author": {
+    "name": "Ribose Inc.",
+    "email": "open.source@ribose.com"
+  },
+  "scripts": {
+    "639": "pnpm --filter @riboseinc/iso639-codes",
+    "3166": "pnpm --filter @riboseinc/iso3166-codes",
+    "15924": "pnpm --filter @riboseinc/iso15924-codes",
+    "prepare": "ts-patch install -s; husky install",
+    "preinstall": "npx only-allow pnpm",
+    "fix": "pnpm run lint --fix"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/cz-commitlint": "^19.2.0",
+    "@commitlint/types": "^19.0.3",
+    "@types/js-yaml": "^4.0.9",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "concurrently": "^8.2.2",
+    "effect": "3.4.7",
+    "eslint": "^9.6.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-jsonc": "^2.16.0",
+    "eslint-plugin-node": "^11.1.0",
+    "husky": "^9.0.11",
+    "mkdirp": "^3.0.1",
+    "rimraf": "^5.0.7",
+    "run-script-os": "^1.1.6",
+    "ts-jest": "^29.1.5",
+    "ts-node": "^10.9.2",
+    "ts-patch": "^3.2.1",
+    "typescript": "^5.5.3"
+  },
+  "license": "MIT",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "17.0.53",
+      "get-func-name@<2.0.1": ">=2.0.1",
+      "react": "17.0.2",
+      "semver@<5.7.2": ">=5.7.2",
+      "semver@>=6.0.0 <6.3.1": ">=6.3.1",
+      "semver@>=7.0.0 <7.5.2": ">=7.5.2",
+      "word-wrap@<1.2.4": ">=1.2.4",
+      "@babel/traverse@<7.23.2": ">=7.23.2",
+      "axios@>=0.8.1 <1.6.0": ">=1.6.0"
+    }
+  },
+  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
+}
