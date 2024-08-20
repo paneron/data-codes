@@ -130,6 +130,7 @@ var rulesForTypescript = {
     varsIgnorePattern : '^_',
     argsIgnorePattern : '^_' ,
   }],
+  "@typescript-eslint/consistent-type-imports": "error",
 };
 
 var rules = Object.assign(

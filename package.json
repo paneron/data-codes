@@ -16,27 +16,26 @@
     "fix": "pnpm run lint --fix"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
+    "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "@commitlint/cz-commitlint": "^19.2.0",
+    "@commitlint/cz-commitlint": "^19.4.0",
     "@commitlint/types": "^19.0.3",
     "@types/js-yaml": "^4.0.9",
-    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/eslint-plugin": "^8.1.0",
     "concurrently": "^8.2.2",
-    "effect": "3.4.7",
-    "eslint": "^9.6.0",
+    "effect": "3.6.4",
+    "eslint": "^9.9.0",
     "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-jest": "^28.8.0",
     "eslint-plugin-jsonc": "^2.16.0",
     "eslint-plugin-node": "^11.1.0",
-    "husky": "^9.0.11",
+    "husky": "^9.1.4",
     "mkdirp": "^3.0.1",
-    "rimraf": "^5.0.7",
+    "rimraf": "^6.0.1",
     "run-script-os": "^1.1.6",
-    "ts-jest": "^29.1.5",
     "ts-node": "^10.9.2",
     "ts-patch": "^3.2.1",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "license": "MIT",
   "pnpm": {
@@ -52,5 +51,5 @@
       "axios@>=0.8.1 <1.6.0": ">=1.6.0"
     }
   },
-  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
+  "packageManager": "pnpm@9.7.1"
 }

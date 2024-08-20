@@ -31,15 +31,6 @@ print_args() {
 
 
 main() {
-  local husky_hook="$(dirname -- "$0")/_/husky.sh"
-  if [[ -r "${husky_hook}" ]]
-  then
-    . "${husky_hook}"
-  else
-    debug "husky hook '${husky_hook}' not found.  Skipping prepare-commit-msg."
-    exit
-  fi
-
   print_args "$@"
 
   if [[ -e .git/rebase-merge ]] || [[ -e .git/rebase-apply ]]
