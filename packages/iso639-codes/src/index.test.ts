@@ -7,12 +7,12 @@ test('There is a header', () => {
 test('Header looks right', () => {
   expect(codes.headers).toEqual(
     [
-      "Code",
-      "Print_Name-en",
-      "Part",
-      "Label-fr",
-      "Inverted_Name-en",
-      "URI",
+      'Code',
+      'Print_Name-en',
+      'Part',
+      'Label-fr',
+      'Inverted_Name-en',
+      'URI',
     ]
   );
 });

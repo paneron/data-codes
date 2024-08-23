@@ -7,13 +7,13 @@ test('There is a header', () => {
 test('Header looks right', () => {
   expect(codes.headers).toEqual(
     [
-      "Code",
-      "N°",
-      "English Name",
-      "Nom français",
-      "PVA",
-      "Unicode Version",
-      "Date",
+      'Code',
+      'N°',
+      'English Name',
+      'Nom français',
+      'PVA',
+      'Unicode Version',
+      'Date',
     ]
   );
 });

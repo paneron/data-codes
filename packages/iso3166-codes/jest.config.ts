@@ -1,6 +1,6 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 
-import { pathsToModuleNameMapper } from "ts-jest";
+import { pathsToModuleNameMapper } from 'ts-jest';
 import { compilerOptions } from './tsconfig.json';
 
 const _pathsToModuleName: Record<string, string | string[]> = pathsToModuleNameMapper(
@@ -27,20 +27,20 @@ Object.entries(_pathsToModuleName).forEach(([key, value]) => {
 })
 
 export default {
-  preset: 'ts-jest',
-  roots: ['src'],
-  transform: {
+  preset    : 'ts-jest',
+  roots     : ['src'],
+  transform : {
     // '^.+\\.[tj]sx?$' to process ts,js,tsx,jsx with `ts-jest`
     // '^.+\\.m?[tj]sx?$' to process ts,js,tsx,jsx,mts,mjs,mtsx,mjsx with `ts-jest`
-    '^.+\\.tsx?$': [
+    '^.+\\.tsx?$' : [
       'ts-jest',
       {
-        useESM: true,
+        useESM : true,
       },
     ],
   },
-  testEnvironment: 'node',
-  extensionsToTreatAsEsm: ['.ts'],
+  testEnvironment        : 'node',
+  extensionsToTreatAsEsm : ['.ts'],
   moduleNameMapper       : pathsToModuleName,
   testPathIgnorePatterns : [
     '/node_modules/',

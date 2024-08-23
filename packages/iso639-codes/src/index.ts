@@ -2,8 +2,8 @@ import tsv from '@/data/iso639-5.tsv';
 import tab from '@/data/iso-639-3_Name_Index.tab';
 
 export function parseTsv(text: string) {
-  const lines = text.split("\n");
-  const itemSeparator = "\t";
+  const lines = text.split('\n');
+  const itemSeparator = '\t';
   const headers = (lines[0] ?? '').split(itemSeparator);
   const items = lines
     .slice(1)
@@ -34,34 +34,34 @@ export function combine6393tabAnd6395tsv() {
   const iso6395Codes = get6395Codes();
 
   const result = {
-    headers: [
-      "Code",
-      "Print_Name-en",
-      "Part",
-      "Label-fr",
-      "Inverted_Name-en",
-      "URI",
+    headers : [
+      'Code',
+      'Print_Name-en',
+      'Part',
+      'Label-fr',
+      'Inverted_Name-en',
+      'URI',
     ],
 
-    items: iso6393Codes.items.map((item, i) => {
+    items : iso6393Codes.items.map((item, i) => {
       if (typeof item[1] === 'undefined') {
-        console.warn("undefined warning", item, i);
+        console.warn('undefined warning', item, i);
       }
       return [
         item[0],
         item[1],
-        "3",
-        "",
+        '3',
+        '',
         item[2],
-        "",
+        '',
       ];
     }).concat(iso6395Codes.items.map((item) => {
       return [
         item[1],
         item[2],
-        "5",
+        '5',
         item[3],
-        "",
+        '',
         item[0],
       ];
     })),

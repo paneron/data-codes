@@ -16,6 +16,7 @@
     "dist": "pnpm -r run dist",
     "prepare": "ts-patch install -s; husky install",
     "preinstall": "npx only-allow pnpm",
+    "lint": "pnpm -r run lint",
     "fix": "pnpm -r run lint --fix"
   },
   "devDependencies": {
@@ -23,6 +24,8 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/cz-commitlint": "^19.4.0",
     "@commitlint/types": "^19.0.3",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.9.0",
     "@types/js-yaml": "^4.0.9",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "concurrently": "^8.2.2",

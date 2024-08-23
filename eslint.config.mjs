@@ -1,6 +1,25 @@
-var path = require('path');
+//
+// Converted from .eslintrc.js with:
+// > npx @eslint/migrate-config .eslintrc.js
+//
 
-var rulesForJs = {
+import tsParser from '@typescript-eslint/parser';
+import jsoncParser from 'jsonc-eslint-parser';
+import jest from 'eslint-plugin-jest';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import js from '@eslint/js';
+import { FlatCompat } from '@eslint/eslintrc';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
+  baseDirectory     : __dirname,
+  recommendedConfig : js.configs.recommended,
+  allConfig         : js.configs.all
+});
+
+const rulesForJs = {
   'quotes' : [
     'warn',
     'single',
@@ -122,7 +141,7 @@ var rulesForJs = {
   'no-unused-vars'    : 'off',
 };
 
-var rulesForTypescript = {
+const rulesForTypescript = {
   '@typescript-eslint/no-redeclare'                            : ['error'],
   '@typescript-eslint/no-empty-function'                       : 'off',
   '@typescript-eslint/no-non-null-asserted-nullish-coalescing' : 'warn',
@@ -130,62 +149,68 @@ var rulesForTypescript = {
     varsIgnorePattern : '^_',
     argsIgnorePattern : '^_' ,
   }],
-  "@typescript-eslint/consistent-type-imports": "error",
+  '@typescript-eslint/consistent-type-imports' : 'error',
 };
 
-var rules = Object.assign(
-  {},
-  rulesForJs,
-  rulesForTypescript,
-);
+const rules = {
+  ...rulesForJs,
+  ...rulesForTypescript,
+};
 
-module.exports = {
-  'root' : true,
-  'env'  : {
-    // "jest/globals" : true,
+export default [{
+  ignores : ['**/dist/'],
+}, {
+  languageOptions : {
+    globals : {},
   },
-  'extends' : [
-    // "plugin:prettier/recommended",
-  ],
-  'rules'     : rules,
-  'overrides' : [
-    {
-      'files'   : ['*.ts', '*.tsx'],
-      'extends' : [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/strict',
-        // "plugin:prettier/recommended",
-      ],
-      'parser'        : '@typescript-eslint/parser',
-      'parserOptions' : {
-        project : path.join(__dirname, 'tsconfig.json'),
-      },
-      'settings' : {
-        'import/resolver' : {
-          typescript : {}
-        }
-      },
-      'rules' : rules,
+}, ...compat.extends(
+  'eslint:recommended',
+  'plugin:@typescript-eslint/strict',
+).map(config => ({
+  ...config,
+  files : ['**/*.ts', '**/*.tsx'],
+
+  languageOptions : {
+    parser      : tsParser,
+    ecmaVersion : 5,
+    sourceType  : 'script',
+
+    parserOptions : {
+      project : path.join(__dirname, 'tsconfig.eslint.json'),
     },
-    {
-      files : ['*.js'],
-      rules : rules,
+  },
+
+  settings : {
+    'import/resolver' : {
+      typescript : {},
     },
-    {
-      'files'   : ['*.json', '*.json5', '*.jsonc'],
-      'extends' : [
-        'plugin:jsonc/recommended-with-jsonc',
-      ],
-      'parser' : 'jsonc-eslint-parser',
-    },
-    {
-      'files'   : ['spec/**'],
-      'plugins' : ['jest'],
-      'extends' : ['plugin:jest/recommended', 'plugin:jest/style'],
-      'rules'   : {
-        'jest/prefer-expect-assertions' : 'off',
-      },
-    },
-  ],
-  'rules' : rules,
-};
+  },
+
+  rules : rules,
+})), {
+  files : ['**/*.js', '**/*.mjs'],
+
+  rules : rulesForJs,
+}, ...compat.extends('plugin:jsonc/recommended-with-jsonc').map(config => ({
+  ...config,
+  languageOptions : {
+    parser : jsoncParser,
+  },
+  files : ['**/*.json', '**/*.json5', '**/*.jsonc'],
+})), ...compat.extends(
+  'plugin:jest/recommended',
+  'plugin:jest/style',
+).map(config => ({
+  ...config,
+  files : ['spec/**'],
+})), {
+  files : ['spec/**'],
+
+  plugins : {
+    jest,
+  },
+
+  rules : {
+    'jest/prefer-expect-assertions' : 'off',
+  },
+}];

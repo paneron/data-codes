@@ -6,7 +6,7 @@ export function parse15924Txt(text: string) {
   const headers = ((text.match(headerRE) ?? [''])[1] ?? '')
     .split(itemSeparator);
   const items = text
-    .split("\n")
+    .split('\n')
     .filter((l) => l.match(itemRE))
     .map((l) => l.split(itemSeparator));
 
