@@ -11,9 +11,12 @@
     "639": "pnpm --filter @riboseinc/iso639-codes",
     "3166": "pnpm --filter @riboseinc/iso3166-codes",
     "15924": "pnpm --filter @riboseinc/iso15924-codes",
+    "test": "pnpm -r run test",
+    "build": "pnpm -r run build",
+    "dist": "pnpm -r run dist",
     "prepare": "ts-patch install -s; husky install",
     "preinstall": "npx only-allow pnpm",
-    "fix": "pnpm run lint --fix"
+    "fix": "pnpm -r run lint --fix"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",
