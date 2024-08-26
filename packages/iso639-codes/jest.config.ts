@@ -35,13 +35,13 @@ export default {
   transform : {
     // '^.+\\.[tj]sx?$' to process ts,js,tsx,jsx with `ts-jest`
     // '^.+\\.m?[tj]sx?$' to process ts,js,tsx,jsx,mts,mjs,mtsx,mjsx with `ts-jest`
-    '^.+\\.tsx?$' : [
+    '\\.tsx?$' : [
       'ts-jest',
       {
         useESM : true,
       },
     ],
-    '^.+\\.(?:tsv|tab)$' : '<rootDir>/textFileTransformer.js',
+    '\\.(?:tsv|tab)$' : '<rootDir>/textFileTransformer.js',
   },
   moduleDirectories : [
     'src',
