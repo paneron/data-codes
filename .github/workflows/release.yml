@@ -1,0 +1,85 @@
+name: release
+
+on:
+  workflow_call:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+    inputs:
+      next_version:
+        description: |
+          Next release version. Possible values: x.y.z, major, minor, patch
+        required: true
+        default: 'skip'
+      # XXX: does not skip for some reason
+      # skip_tests:
+      #   description: |
+      #     Skip tests iff === 'true'
+      #   required: true
+      #   default: 'false'
+
+env:
+  PACKAGES_PATH: packages
+
+jobs:
+  tests:
+    # XXX: does not skip for some reason
+    # if: github.events.inputs.skip_tests != 'true'
+    uses: ./.github/workflows/tests.yml
+
+  publish:
+    needs: [tests]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['22.x']
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 9
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        id: setup-node
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: 'https://registry.npmjs.org'
+
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --strict-peer-dependencies
+
+      - name: Create a new version
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.next_version != 'skip' }}
+        shell: bash
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+          cd "${MAIN_PACKAGE_PATH}"
+          pnpm version --new-version ${{ github.event.inputs.next_version }}
+          git add -u
+          git commit -m "chore: Release ${{ github.event.inputs.next_version }}"
+          git tag -a "${{ github.event.inputs.next_version }}" -mBump
+          # Push commit along with tag
+          git push origin --tags :
+
+      - name: Publish to npm
+        run: |
+          cd "${PACKAGES_PATH}"
+          for dir in */; do
+            diff -u {,dist/}package.json | \
+              cp {,dist/}package.json
+            pnpm publish dist --access public --no-git-checks
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}

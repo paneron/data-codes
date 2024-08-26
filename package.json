@@ -17,6 +17,8 @@
     "prepare": "ts-patch install -s; husky install",
     "preinstall": "npx only-allow pnpm",
     "lint": "pnpm -r run lint",
+    "typecheck": "pnpm -r run typecheck",
+    "lint-typecheck": "pnpm -r run lint-typecheck",
     "fix": "pnpm -r run lint --fix"
   },
   "devDependencies": {

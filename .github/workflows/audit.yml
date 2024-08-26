@@ -1,0 +1,34 @@
+name: audit
+
+on:
+  schedule:
+    # every day at 9:00 UTC
+    - cron: '0 9 * * *'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 9
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        id: setup-node
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --strict-peer-dependencies
+
+      - name: Run audit
+        run: |
+          make audit

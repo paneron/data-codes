@@ -1,0 +1,49 @@
+name: build
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  CACHE_DIR: dist
+  MAIN_PACKAGE_PATH: .
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        node:
+          - '22.x'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Nodejs
+        uses: actions/setup-node@v4
+        id: setup-node
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --strict-peer-dependencies
+
+      - name: Build on ${{ runner.os }}
+        shell: bash
+        run: |
+          pnpm run dist
