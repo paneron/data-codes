@@ -27,6 +27,8 @@ defaults:
     working-directory: packages/iso639-codes
 
 env:
+  # Disable git hooks
+  HUSKY: 0
   GIT_TAG_PREFIX: 'iso639-codes'
 
 jobs:

@@ -9,7 +9,7 @@
     "639": "pnpm --filter @riboseinc/iso639-codes",
     "3166": "pnpm --filter @riboseinc/iso3166-codes",
     "15924": "pnpm --filter @riboseinc/iso15924-codes",
-    "prepare": "ts-patch install -s; husky install",
+    "prepare": "ts-patch install -s; node .husky/install.mjs",
     "preinstall": "npx only-allow pnpm",
     "build": "pnpm -r run build",
     "dist": "pnpm -r run dist",

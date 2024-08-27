@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 env:
-  CACHE_DIR: dist
-  MAIN_PACKAGE_PATH: .
+  # Disable git hooks
+  HUSKY: 0
 
 jobs:
   build:

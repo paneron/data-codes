@@ -2,8 +2,9 @@
   "name": "@riboseinc/iso3166-codes",
   "version": "0.0.1-dev",
   "description": "Codes for ISO 3166",
+  "type": "module",
   "scripts": {
-    "prepare": "ts-patch install -s; husky install",
+    "prepare": "ts-patch install -s",
     "extract-codes": "scripts/extract_codes",
     "preinstall": "npx only-allow pnpm",
     "diagnose": "tsc --pretty --diagnostics",

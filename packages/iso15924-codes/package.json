@@ -4,7 +4,7 @@
   "description": "Codes for ISO 15924",
   "type": "module",
   "scripts": {
-    "prepare": "ts-patch install -s; husky install",
+    "prepare": "ts-patch install -s",
     "updatecodes:iso15924": "wget https://www.unicode.org/iso15924/iso15924.txt",
     "preinstall": "npx only-allow pnpm",
     "diagnose": "tsc --pretty --diagnostics",

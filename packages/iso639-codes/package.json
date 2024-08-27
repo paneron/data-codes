@@ -4,7 +4,7 @@
   "description": "Codes for ISO 639",
   "type": "module",
   "scripts": {
-    "prepare": "ts-patch install -s; husky install",
+    "prepare": "ts-patch install -s",
     "preinstall": "npx only-allow pnpm",
     "diagnose": "tsc --pretty --diagnostics",
     "typecheck": "tsc --pretty --noEmit",

@@ -15,6 +15,10 @@ on:
       #   required: true
       #   default: 'false'
 
+env:
+  # Disable git hooks
+  HUSKY: 0
+
 jobs:
   publish:
     runs-on: ubuntu-latest

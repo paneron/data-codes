@@ -5,6 +5,10 @@ on:
     # every day at 9:00 UTC
     - cron: '0 9 * * *'
 
+env:
+  # Disable git hooks
+  HUSKY: 0
+
 jobs:
   audit:
     runs-on: ubuntu-latest
