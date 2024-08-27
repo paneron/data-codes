@@ -22,7 +22,7 @@
     "build-typecheck": "concurrently npm:build npm:typecheck",
     "clean-build": "pnpm run clean; pnpm run build",
     "clean-build-typecheck": "pnpm run clean; pnpm run build-typecheck",
-    "lint": "eslint",
+    "lint": "eslint --parser-options project:./tsconfig.eslint.json",
     "clean": "rimraf ${npm_package_dist_dir}/* *.tsbuildinfo",
     "lint-typecheck": "concurrently npm:lint npm:typecheck",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",

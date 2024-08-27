@@ -1,8 +1,6 @@
 {
-  "name": "@riboseinc/data-codes",
-  "version": "0.0.1",
-  "description": "Repository for standard data codes",
-  "repository": "https://github.com/riboseinc/data-codes",
+  "version": "0.0.0",
+  "private": true,
   "author": {
     "name": "Ribose Inc.",
     "email": "open.source@ribose.com"
@@ -11,15 +9,19 @@
     "639": "pnpm --filter @riboseinc/iso639-codes",
     "3166": "pnpm --filter @riboseinc/iso3166-codes",
     "15924": "pnpm --filter @riboseinc/iso15924-codes",
-    "test": "pnpm -r run test",
-    "build": "pnpm -r run build",
-    "dist": "pnpm -r run dist",
     "prepare": "ts-patch install -s; husky install",
     "preinstall": "npx only-allow pnpm",
-    "lint": "pnpm -r run lint",
+    "build": "pnpm -r run build",
+    "dist": "pnpm -r run dist",
     "typecheck": "pnpm -r run typecheck",
+    "lint": "pnpm -r run lint",
     "lint-typecheck": "pnpm -r run lint-typecheck",
-    "fix": "pnpm -r run lint --fix"
+    "test": "pnpm -r run test"
+  },
+  "dependencies": {
+    "@riboseinc/iso639-codes": "workspace:*",
+    "@riboseinc/iso3166-codes": "workspace:*",
+    "@riboseinc/iso15924-codes": "workspace:*"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",

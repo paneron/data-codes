@@ -8,5 +8,6 @@
       "@/*" : ["src/*"]
     }
   },
-  "include": ["src", "src/data/*.json"]
+  "include": ["src", "src/data/*.json"],
+  "exclude": ["node_modules", "dist"]
 }

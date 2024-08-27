@@ -18,6 +18,16 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      '@riboseinc/iso15924-codes':
+        specifier: workspace:*
+        version: link:packages/iso15924-codes
+      '@riboseinc/iso3166-codes':
+        specifier: workspace:*
+        version: link:packages/iso3166-codes
+      '@riboseinc/iso639-codes':
+        specifier: workspace:*
+        version: link:packages/iso639-codes
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.4.0
