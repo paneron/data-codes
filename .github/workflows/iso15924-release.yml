@@ -1,0 +1,42 @@
+name: iso15924-codes - release
+
+on:
+  workflow_call:
+  push:
+    tags:
+      - '*'
+    paths:
+      - 'packages/iso15924-codes/**'
+      - '.github/workflows/iso15924-release.yml'
+  workflow_dispatch:
+    inputs:
+      next_version:
+        description: |
+          Next release version. Possible values: x.y.z, major, minor, patch
+        required: true
+        default: 'skip'
+      # XXX: does not skip for some reason
+      # skip_tests:
+      #   description: |
+      #     Skip tests iff === 'true'
+      #   required: true
+      #   default: 'false'
+
+defaults:
+  run:
+    working-directory: packages/iso15924-codes
+
+env:
+  GIT_TAG_PREFIX: 'iso15924-codes'
+
+jobs:
+  tests:
+    # XXX: does not skip for some reason
+    # if: github.events.inputs.skip_tests != 'true'
+    uses: ./.github/workflows/tests.yml
+
+  publish:
+    needs: [tests]
+    uses: ./.github/workflows/publish.yml
+    with:
+      next_version: ${{ github.event.inputs.next_version }}

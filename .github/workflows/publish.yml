@@ -2,10 +2,6 @@ name: release
 
 on:
   workflow_call:
-  push:
-    tags:
-      - '*'
-  workflow_dispatch:
     inputs:
       next_version:
         description: |
@@ -19,17 +15,8 @@ on:
       #   required: true
       #   default: 'false'
 
-env:
-  PACKAGES_PATH: packages
-
 jobs:
-  tests:
-    # XXX: does not skip for some reason
-    # if: github.events.inputs.skip_tests != 'true'
-    uses: ./.github/workflows/tests.yml
-
   publish:
-    needs: [tests]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -54,7 +41,6 @@ jobs:
           node-version: ${{ matrix.node }}
           registry-url: 'https://registry.npmjs.org'
 
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
 
@@ -65,21 +51,21 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-          cd "${MAIN_PACKAGE_PATH}"
           pnpm version --new-version ${{ github.event.inputs.next_version }}
           git add -u
-          git commit -m "chore: Release ${{ github.event.inputs.next_version }}"
-          git tag -a "${{ github.event.inputs.next_version }}" -mBump
+          git commit -m "chore: Release ${GIT_TAG_PREFIX}/${{ github.event.inputs.next_version }}"
+          git pull --rebase
+          git tag -a "${GIT_TAG_PREFIX}/${{ github.event.inputs.next_version }}" -mBump
           # Push commit along with tag
           git push origin --tags :
 
+      - name: Build
+        run: pnpm dist
+
       - name: Publish to npm
         run: |
-          cd "${PACKAGES_PATH}"
-          for dir in */; do
-            diff -u {,dist/}package.json | \
-              cp {,dist/}package.json
-            pnpm publish dist --access public --no-git-checks
-          done
+          diff -u {,dist/}package.json | \
+            cp {,dist/}package.json
+          pnpm publish dist --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}

@@ -19,6 +19,7 @@ on:
       - '!.github/workflows/lint.yml'
       - '!.github/workflows/build.yml'
       - '!.github/workflows/test.yml'
+      - '!.github/workflows/*-release.yml'
   pull_request:
     paths-ignore:
       - '/*.sh'
@@ -40,5 +41,5 @@ jobs:
     uses: ./.github/workflows/build.yml
 
   test:
-    needs: [build]
+    # needs: [build]
     uses: ./.github/workflows/test.yml
