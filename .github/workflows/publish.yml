@@ -52,6 +52,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.next_version != 'skip' }}
         shell: bash
         run: |
+          set -x
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
