@@ -56,13 +56,17 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.next_version != 'skip' }}
         shell: bash
         run: |
-          set -x
+          set -x # DEBUG
           GIT_TAG_PREFIX=${{ github.event.inputs.GIT_TAG_PREFIX }}
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
           new_version=$(pnpm version --new-version ${{ github.event.inputs.next_version }})
+          echo "new_version=${new_version}" # DEBUG
+          git status # DEBUG
+          git diff # DEBUG
           git add -u
+          git status # DEBUG
           git commit -m "chore: Release ${GIT_TAG_PREFIX}/${new_version}"
           git pull --rebase
           git tag -a "${GIT_TAG_PREFIX}/${new_version}" -mBump
