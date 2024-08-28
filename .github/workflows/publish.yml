@@ -55,11 +55,11 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-          pnpm version --new-version ${{ github.event.inputs.next_version }}
+          new_version=$(pnpm version --new-version ${{ github.event.inputs.next_version }})
           git add -u
-          git commit -m "chore: Release ${GIT_TAG_PREFIX}/${{ github.event.inputs.next_version }}"
+          git commit -m "chore: Release ${GIT_TAG_PREFIX}/${new_version}"
           git pull --rebase
-          git tag -a "${GIT_TAG_PREFIX}/${{ github.event.inputs.next_version }}" -mBump
+          git tag -a "${GIT_TAG_PREFIX}/${new_version}" -mBump
           # Push commit along with tag
           git push origin --tags :
 
