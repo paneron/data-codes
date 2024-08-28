@@ -8,7 +8,11 @@ on:
           Next release version. Possible values: x.y.z, major, minor, patch
         required: true
         type: string
-        default: 'skip'
+      GIT_TAG_PREFIX:
+        description: |
+          Git tag prefix.
+        required: true
+        type: string
       # XXX: does not skip for some reason
       # skip_tests:
       #   description: |
@@ -53,6 +57,7 @@ jobs:
         shell: bash
         run: |
           set -x
+          GIT_TAG_PREFIX=${{ github.event.inputs.GIT_TAG_PREFIX }}
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
