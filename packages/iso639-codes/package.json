@@ -6,9 +6,9 @@
   "scripts": {
     "prepare": "ts-patch install -s",
     "preinstall": "npx only-allow pnpm",
-    "diagnose": "tsc --pretty --diagnostics",
-    "typecheck": "tsc --pretty --noEmit",
-    "build:decl": "tsc --pretty --emitDeclarationOnly",
+    "diagnose": "tsc --pretty --diagnostics --project tsconfig.decl.json",
+    "typecheck": "tsc --pretty --noEmit --project tsconfig.decl.json",
+    "build:decl": "tsc --pretty --emitDeclarationOnly --project tsconfig.decl.json",
     "build:decl:watch": "pnpm run build:decl --watch",
     "tsc --pretty": "tsc",
     "build": "pnpm run build:cjs",

@@ -19,9 +19,9 @@
     "test": "pnpm -r run test"
   },
   "dependencies": {
-    "@riboseinc/iso639-codes": "workspace:*",
+    "@riboseinc/iso15924-codes": "workspace:*",
     "@riboseinc/iso3166-codes": "workspace:*",
-    "@riboseinc/iso15924-codes": "workspace:*"
+    "@riboseinc/iso639-codes": "workspace:*"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",
@@ -30,6 +30,7 @@
     "@commitlint/types": "^19.0.3",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.9.0",
+    "@types/jest": "^29.5.12",
     "@types/js-yaml": "^4.0.9",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "concurrently": "^8.2.2",
