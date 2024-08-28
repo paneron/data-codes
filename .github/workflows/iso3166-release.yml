@@ -26,11 +26,6 @@ defaults:
   run:
     working-directory: packages/iso3166-codes
 
-env:
-  # Disable git hooks
-  HUSKY: 0
-  GIT_TAG_PREFIX: 'iso3166-codes'
-
 jobs:
   tests:
     # XXX: does not skip for some reason
@@ -42,4 +37,4 @@ jobs:
     uses: ./.github/workflows/publish.yml
     with:
       next_version: ${{ github.event.inputs.next_version }}
-      GIT_TAG_PREFIX: ${{ env.GIT_TAG_PREFIX }}
+      GIT_TAG_PREFIX: 'iso3166-codes'
