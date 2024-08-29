@@ -76,6 +76,12 @@ jobs:
       - name: Configure npm/pnpm for publishing
         shell: bash
         run: |
+          # Check if node auth token is valid
+          if [[ -z "${NODE_AUTH_TOKEN:-}" ]]; then
+            printf "\e[1;31mError:\e[m Missing NODE_AUTH_TOKEN\n" >&2
+            exit 1
+          fi
+
           pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
@@ -83,4 +89,12 @@ jobs:
       - name: Publish to npm
         working-directory: ./packages/${{ inputs.subpackage_name }}
         run: |
+          # Check if node auth token is valid
+          if [[ -z "${NODE_AUTH_TOKEN:-}" ]]; then
+            printf "\e[1;31mError:\e[m Missing NODE_AUTH_TOKEN\n" >&2
+            exit 1
+          fi
+
           pnpm publish dist --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
