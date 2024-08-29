@@ -72,11 +72,17 @@ jobs:
       - name: Build all subpackages
         run: pnpm dist
 
+      # https://github.com/pnpm/pnpm/issues/3141#issuecomment-1305563972
+      - name: Configure npm/pnpm for publishing
+        shell: bash
+        run: |
+          pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
+
       - name: Publish to npm
         working-directory: ./packages/${{ inputs.subpackage_name }}
         run: |
           diff -u {,dist/}package.json | \
             cp {,dist/}package.json
           pnpm publish dist --access public --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
