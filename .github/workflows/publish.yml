@@ -57,7 +57,7 @@ jobs:
         shell: bash
         run: |
           set -x # DEBUG
-          GIT_TAG_PREFIX=${{ github.event.inputs.GIT_TAG_PREFIX }}
+          GIT_TAG_PREFIX=${{ inputs.GIT_TAG_PREFIX }}
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
