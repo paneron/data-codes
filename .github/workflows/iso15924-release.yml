@@ -38,3 +38,5 @@ jobs:
     with:
       next_version: ${{ github.event.inputs.next_version }}
       subpackage_name: 'iso15924-codes'
+    secrets:
+      NPM_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
