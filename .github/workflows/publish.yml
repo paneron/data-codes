@@ -66,16 +66,14 @@ jobs:
           echo "new_version=${new_version}" # DEBUG
           git status # DEBUG
           git diff # DEBUG
-          git show HEAD # DEBUG
           git add -u
           git status # DEBUG
           git diff # DEBUG
-          git show HEAD # DEBUG
           git commit -m "chore: Release ${GIT_TAG_PREFIX}/${new_version}"
           git pull --rebase
           git tag -a "${GIT_TAG_PREFIX}/${new_version}" -mBump
           # Push commit along with tag
-          git push origin --tags :
+          # git push origin --tags : # DEBUG
 
       - name: Build
         run: pnpm dist
@@ -84,6 +82,8 @@ jobs:
         run: |
           diff -u {,dist/}package.json | \
             cp {,dist/}package.json
+          pwd
+          false # DEBUG
           pnpm publish dist --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
