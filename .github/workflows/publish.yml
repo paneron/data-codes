@@ -8,9 +8,9 @@ on:
           Next release version. Possible values: x.y.z, major, minor, patch
         required: true
         type: string
-      GIT_TAG_PREFIX:
+      subpackage_name:
         description: |
-          Git tag prefix.
+          Used in Git tag prefix.
         required: true
         type: string
       # XXX: does not skip for some reason
@@ -57,7 +57,7 @@ jobs:
         shell: bash
         run: |
           set -x # DEBUG
-          GIT_TAG_PREFIX=${{ inputs.GIT_TAG_PREFIX }}
+          GIT_TAG_PREFIX=${{ inputs.subpackage_name }}
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
@@ -75,10 +75,11 @@ jobs:
           # Push commit along with tag
           # git push origin --tags : # DEBUG
 
-      - name: Build
+      - name: Build all subpackages
         run: pnpm dist
 
       - name: Publish to npm
+        working-directory: ./packages/${{ inputs.subpackage_name }}
         run: |
           diff -u {,dist/}package.json | \
             cp {,dist/}package.json
