@@ -83,6 +83,4 @@ jobs:
       - name: Publish to npm
         working-directory: ./packages/${{ inputs.subpackage_name }}
         run: |
-          diff -u {,dist/}package.json | \
-            cp {,dist/}package.json
           pnpm publish dist --access public --no-git-checks
