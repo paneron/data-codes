@@ -61,7 +61,8 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-          new_version=$(pnpm version --new-version ${{ github.event.inputs.next_version }})
+          # Running `pnpm version` to translate `minor` to semver string:
+          new_version=$(pnpm version --no-git-tag-version --new-version ${{ github.event.inputs.next_version }})
           echo "new_version=${new_version}" # DEBUG
           git status # DEBUG
           git diff # DEBUG
