@@ -67,7 +67,7 @@ jobs:
           git pull --rebase
           git tag -a "${GIT_TAG_PREFIX}/${new_version}" -mBump
           # Push commit along with tag
-          # git push origin --tags : # DEBUG
+          git push origin --tags :
 
       - name: Build all subpackages
         run: pnpm dist
@@ -77,8 +77,6 @@ jobs:
         run: |
           diff -u {,dist/}package.json | \
             cp {,dist/}package.json
-          pwd
-          false # DEBUG
           pnpm publish dist --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
