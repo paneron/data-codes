@@ -1,5 +1,5 @@
 {
-  "name": "@riboseinc/iso639-codes",
+  "name": "@paneron/iso639-codes",
   "version": "0.0.1-dev",
   "description": "Codes for ISO 639",
   "type": "module",
