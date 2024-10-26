@@ -1,6 +1,6 @@
 {
   "name": "@paneron/iso15924-codes",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Codes for ISO 15924",
   "type": "module",
   "scripts": {
