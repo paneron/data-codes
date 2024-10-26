@@ -73,7 +73,7 @@ jobs:
           git pull --rebase
           git tag -a "${GIT_TAG_PREFIX}/${new_version}" -mBump
           # Push commit along with tag
-          echo git push origin --tags :
+          git push origin --tags :
 
       - name: Build all subpackages
         run: pnpm dist
@@ -93,6 +93,6 @@ jobs:
           # Debug what files are being published
           npm pack --dry-run
 
-          echo pnpm publish dist --access public --no-git-checks
+          pnpm publish dist --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
