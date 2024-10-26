@@ -57,6 +57,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
 
+      - name: Build dist
+        shell: bash
+        run: |
+          pnpm run dist
+
       - name: Create a new version
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.next_version != 'skip' }}
         shell: bash
