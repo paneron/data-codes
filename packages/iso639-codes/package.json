@@ -35,13 +35,21 @@
     "LICENSE",
     "dist"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
         "dist/*"
       ]
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts"
     }
   },
   "devDependencies": {
