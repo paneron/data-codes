@@ -109,15 +109,15 @@ jobs:
 
           has_error=
           if [[ "$pack_shasum" != "$publish_shasum" ]]; then
-            printf "\e[1;31mError:\e[m Package shasum do not match:\n" >&2
-            printf "  npm pack shasum: $pack_shasum\n" >&2
+            printf "\e[1;38;5;208mWarning:\e[m Package shasum do not match:\n" >&2
+            printf "  npm pack    shasum: $pack_shasum\n" >&2
             printf "  npm publish shasum: $publish_shasum\n" >&2
             has_error=1
           fi
 
           if [[ "$pack_total_files" != "$publish_total_files" ]]; then
             printf "\e[1;31mError:\e[m Package total files do not match:\n" >&2
-            printf "  npm pack total files: $pack_total_files\n" >&2
+            printf "  npm pack    total files: $pack_total_files\n" >&2
             printf "  npm publish total files: $publish_total_files\n" >&2
             has_error=1
           fi
