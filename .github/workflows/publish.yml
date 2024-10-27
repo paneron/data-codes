@@ -88,10 +88,42 @@ jobs:
           fi
 
           # Debug what files are in dist/
-          ls -la dist
+          ls -la dist >&2
 
-          # Debug what files are being published
-          npm pack --dry-run
+          # Verify total files and shasum of `pack` and `publish` are the same
+          pack_sout=$(npm pack --dry-run 2>&1)
+          publish_sout=$(pnpm publish --access public --no-git-checks --dry-run 2>&1)
+
+          printf "\e[1mnpm pack (dry run):\e[m\n" >&2
+          printf "$pack_sout\n\n\n" >&2
+          printf "\e[1mnpm publish (dry run):\e[m\n" >&2
+          printf "$publish_sout\n\n\n" >&2
+
+          pack_shasum=$(<<< "$pack_sout" command sed '/shasum/!d; s/.*:\s*\(.*\)$/\1/')
+          publish_shasum=$(<<< "$publish_sout" command sed '/shasum/!d; s/.*:\s*\(.*\)$/\1/')
+
+          pack_total_files=$(<<< "$pack_sout" command sed '/total.files/!d; s/.*:\s*\(.*\)$/\1/')
+          publish_total_files=$(<<< "$publish_sout" command sed '/total.files/!d; s/.*:\s*\(.*\)$/\1/')
+
+          has_error=
+          if [[ "$pack_shasum" != "$publish_shasum" ]]; then
+            printf "\e[1;31mError:\e[m Package shasum do not match:\n" >&2
+            printf "  npm pack shasum: $pack_shasum\n" >&2
+            printf "  npm publish shasum: $publish_shasum\n" >&2
+            has_error=1
+          fi
+
+          if [[ "$pack_total_files" != "$publish_total_files" ]]; then
+            printf "\e[1;31mError:\e[m Package total files do not match:\n" >&2
+            printf "  npm pack total files: $pack_total_files\n" >&2
+            printf "  npm publish total files: $publish_total_files\n" >&2
+            has_error=1
+          fi
+
+          if [[ -n "$has_error" ]]; then
+            printf "Aborting due to previous errors.\n" >&2
+            exit 1
+          fi
 
           pnpm publish --access public --no-git-checks
         env:
