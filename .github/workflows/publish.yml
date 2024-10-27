@@ -60,6 +60,7 @@ jobs:
       - name: Create a new version
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.next_version != 'skip' }}
         shell: bash
+        id: new-version
         working-directory: ./packages/${{ inputs.subpackage_name }}
         run: |
           GIT_TAG_PREFIX=${{ inputs.subpackage_name }}
@@ -72,6 +73,7 @@ jobs:
           git commit -m "chore: Release ${GIT_TAG_PREFIX}/${new_version}"
           git pull --rebase
           git tag -a "${GIT_TAG_PREFIX}/${new_version}" -mBump
+          echo "new_tag=${GIT_TAG_PREFIX}/${new_version}" >> $GITHUB_OUTPUT
           # Push commit along with tag
           git push origin --tags :
 
@@ -122,6 +124,12 @@ jobs:
 
           if [[ -n "$has_error" ]]; then
             printf "Aborting due to previous errors.\n" >&2
+            # Revert tag
+            git tag -d "${{ steps.new-version.outputs.new_tag }}"
+            git push --delete origin "${{ steps.new-version.outputs.new_tag }}"
+            # Revert commit
+            git reset --hard HEAD^
+            git push origin --force-with-lease
             exit 1
           fi
 
