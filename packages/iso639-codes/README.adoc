@@ -1,0 +1,21 @@
+= ISO 639 Codes
+
+== Installation
+
+[source,shell]
+----
+npm install @paneron/639-codes
+----
+
+== Usage
+
+[source,javascript]
+----
+import { codes } from '@paneron/iso639-codes';
+
+console.log(codes);
+----
+
+== License
+
+See the LICENSE file.

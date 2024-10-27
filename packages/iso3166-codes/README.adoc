@@ -1,0 +1,21 @@
+= ISO 3166 Codes
+
+== Installation
+
+[source,shell]
+----
+npm install @paneron/iso3166-codes
+----
+
+== Usage
+
+[source,javascript]
+----
+import { codes } from '@paneron/iso3166-codes';
+
+console.log(codes);
+----
+
+== License
+
+See the LICENSE file.

@@ -1,0 +1,21 @@
+= ISO 15924 Codes
+
+== Installation
+
+[source,shell]
+----
+npm install @paneron/iso15924-codes
+----
+
+== Usage
+
+[source,javascript]
+----
+import { codes } from '@paneron/iso15924-codes';
+
+console.log(codes);
+----
+
+== License
+
+See the LICENSE file.

@@ -33,6 +33,8 @@
   "src_dir": "src",
   "dist_dir": "dist",
   "files": [
+    "README.adoc",
+    "LICENSE",
     "dist"
   ],
   "main": "index.js",
