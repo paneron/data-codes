@@ -2,7 +2,6 @@
   "name": "@paneron/iso3166-codes",
   "version": "0.1.6",
   "description": "Codes for ISO 3166",
-  "type": "module",
   "scripts": {
     "prepare": "ts-patch install -s",
     "extract-codes": "scripts/extract_codes",
@@ -11,10 +10,12 @@
     "typecheck": "tsc --noEmit",
     "build:decl": "tsc --project tsconfig.decl.json",
     "build:decl:watch": "pnpm run build:decl --watch",
-    "build": "pnpm run build:cjs",
+    "build": "concurrently pnpm:build:cjs pnpm:build:mjs",
+    "build:mjs": "swc ${npm_package_src_dir} --strip-leading-paths --sync --ignore '*.test.*' --config module.type=es6 --out-dir ${npm_package_dist_dir}/mjs --copy-files --extensions '.ts,.tsx,.js,.jsx' && pnpm run postbuild:mjs",
+    "build:cjs": "swc ${npm_package_src_dir} --strip-leading-paths --sync --ignore '*.test.*' --config module.type=commonjs --out-dir ${npm_package_dist_dir}/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx'",
+    "postbuild:mjs": "echo '{\"type\": \"module\"}'> ${npm_package_dist_dir}/mjs/package.json",
     "prebuild": "rm -rf ${npm_package_dist_dir}/; mkdir ${npm_package_dist_dir}/; cp package.json ${npm_package_dist_dir}/;",
     "prebuild:watch": "pnpm run prebuild",
-    "build:cjs": "swc ${npm_package_src_dir} --strip-leading-paths --sync --ignore '*.test.*' --out-dir ${npm_package_dist_dir} --copy-files --extensions '.ts,.tsx,.js,.jsx'",
     "build:watch": "pnpm run build --watch",
     "dist": "concurrently npm:build npm:build:decl",
     "dist:watch": "concurrently npm:build:watch npm:build:decl:watch",
@@ -41,16 +42,20 @@
   "typesVersions": {
     "*": {
       "*": [
-        "dist/*"
+        "dist/types/*"
       ]
     }
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/mjs/index.js",
+      "require": "./dist/cjs/index.js"
     },
     "./*": {
-      "types": "./dist/*.d.ts"
+      "types": "./dist/types/*.d.ts",
+      "import": "./dist/mjs/*.js",
+      "require": "./dist/cjs/*.js"
     }
   },
   "devDependencies": {

@@ -1,20 +1,20 @@
 {
   "$schema": "http://json.schemastore.org/swcrc",
   "module": {
-    "type": "commonjs"
+    "type": "es6"
   },
   "exclude": [
     ".*\\.test\\.tsx?"
   ],
   "jsc": {
     "externalHelpers": false,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "@": [
-        "./index"
+        "./src/index"
       ],
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     },
     "parser": {

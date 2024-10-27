@@ -41,7 +41,7 @@ export default {
         useESM : true,
       },
     ],
-    '\\.(?:tsv|tab)$' : '<rootDir>/textFileTransformer.js',
+    '\\.(?:tsv|tab)$' : '<rootDir>/textFileTransformer.mjs',
   },
   moduleDirectories : [
     'src',

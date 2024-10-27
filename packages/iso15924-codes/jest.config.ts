@@ -41,7 +41,7 @@ export default {
         useESM : true,
       },
     ],
-    '\\.txt$' : '<rootDir>/textFileTransformer.js',
+    '\\.txt$' : '<rootDir>/textFileTransformer.mjs',
   },
   moduleDirectories : [
     'src',
