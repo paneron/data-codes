@@ -25,7 +25,6 @@
     "exactOptionalPropertyTypes" : false,
     "verbatimModuleSyntax": true,
 
-    "outDir" : "dist",
     "typeRoots" : [
       "./src/@types",
       "./node_modules/@types"
