@@ -1,6 +1,6 @@
 {
   "name": "@paneron/iso3166-codes",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Codes for ISO 3166",
   "type": "module",
   "scripts": {
