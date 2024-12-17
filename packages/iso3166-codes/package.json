@@ -37,8 +37,8 @@
     "LICENSE",
     "dist"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
