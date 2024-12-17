@@ -6,9 +6,9 @@
     "email": "open.source@ribose.com"
   },
   "scripts": {
-    "639": "pnpm --filter @riboseinc/iso639-codes",
-    "3166": "pnpm --filter @riboseinc/iso3166-codes",
-    "15924": "pnpm --filter @riboseinc/iso15924-codes",
+    "639": "pnpm --filter @paneron/iso639-codes",
+    "3166": "pnpm --filter @paneron/iso3166-codes",
+    "15924": "pnpm --filter @paneron/iso15924-codes",
     "prepare": "ts-patch install -s; node .husky/install.mjs",
     "preinstall": "npx only-allow pnpm",
     "build": "pnpm -r run build",
@@ -19,9 +19,9 @@
     "test": "pnpm -r run test"
   },
   "dependencies": {
-    "@riboseinc/iso15924-codes": "workspace:*",
-    "@riboseinc/iso3166-codes": "workspace:*",
-    "@riboseinc/iso639-codes": "workspace:*"
+    "@paneron/iso15924-codes": "workspace:*",
+    "@paneron/iso3166-codes": "workspace:*",
+    "@paneron/iso639-codes": "workspace:*"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",
