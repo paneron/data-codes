@@ -24,29 +24,29 @@
     "@paneron/iso639-codes": "workspace:*"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.4.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@commitlint/cz-commitlint": "^19.4.0",
-    "@commitlint/types": "^19.0.3",
-    "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.9.0",
-    "@types/jest": "^29.5.12",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@commitlint/cz-commitlint": "^19.6.1",
+    "@commitlint/types": "^19.5.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
+    "@types/jest": "^29.5.14",
     "@types/js-yaml": "^4.0.9",
-    "@typescript-eslint/eslint-plugin": "^8.1.0",
-    "concurrently": "^8.2.2",
-    "effect": "3.6.4",
-    "eslint": "^9.9.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-jest": "^28.8.0",
-    "eslint-plugin-jsonc": "^2.16.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "concurrently": "^9.1.0",
+    "effect": "3.11.7",
+    "eslint": "^9.17.0",
+    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-plugin-jest": "^28.9.0",
+    "eslint-plugin-jsonc": "^2.18.2",
     "eslint-plugin-node": "^11.1.0",
-    "husky": "^9.1.4",
+    "husky": "^9.1.7",
     "mkdirp": "^3.0.1",
     "rimraf": "^6.0.1",
     "run-script-os": "^1.1.6",
     "ts-node": "^10.9.2",
-    "ts-patch": "^3.2.1",
-    "typescript": "^5.5.4"
+    "ts-patch": "^3.3.0",
+    "typescript": "^5.7.2"
   },
   "license": "MIT",
   "pnpm": {
@@ -63,5 +63,5 @@
       "micromatch@<4.0.8": ">=4.0.8"
     }
   },
-  "packageManager": "pnpm@9.7.1"
+  "packageManager": "pnpm@9.15.0"
 }
