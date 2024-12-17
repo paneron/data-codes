@@ -1,6 +1,6 @@
 {
   "name": "@paneron/iso3166-codes",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Codes for ISO 3166",
   "scripts": {
     "prepare": "ts-patch install -s",
