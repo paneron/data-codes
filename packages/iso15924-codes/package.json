@@ -1,6 +1,6 @@
 {
   "name": "@paneron/iso15924-codes",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Codes for ISO 15924",
   "scripts": {
     "prepare": "ts-patch install -s",
