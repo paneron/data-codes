@@ -5,17 +5,15 @@ test('There is a header', () => {
 });
 
 test('Header looks right', () => {
-  expect(codes.headers).toEqual(
-    [
-      'Code',
-      'N°',
-      'English Name',
-      'Nom français',
-      'PVA',
-      'Unicode Version',
-      'Date',
-    ]
-  );
+  expect(codes.headers).toEqual([
+    'Code',
+    'N°',
+    'English Name',
+    'Nom français',
+    'PVA',
+    'Unicode Version',
+    'Date',
+  ]);
 });
 
 test('There are a correct number of items', () => {
@@ -37,7 +35,7 @@ test('Each item has 7 non-empty elements', () => {
     expect(item).not.toBe(undefined);
     // expect item to be a string
     item.forEach((v) => expect(typeof v).toBe('string'));
-  })
+  });
 });
 
 test('Last item has number 999', () => {

@@ -1,11 +1,11 @@
 {
-  "extends" : "./tsconfig.json",
-  "include" : [
+  "extends": "./tsconfig.json",
+  "include": [
     "src",
     "scripts",
     "jest.config.ts"
   ],
-  "exclude" : [
+  "exclude": [
     "node_modules",
     "dist"
   ]
