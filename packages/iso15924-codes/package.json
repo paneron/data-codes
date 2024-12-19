@@ -8,6 +8,7 @@
     "preinstall": "npx only-allow pnpm",
     "diagnose": "tsc --diagnostics --project tsconfig.decl.json",
     "typecheck": "tsc --noEmit",
+    "extract-codes": "ts-node --project tsconfig.dev.json scripts/extract_codes.ts",
     "build:decl": "tsc --project tsconfig.decl.json",
     "build:decl:watch": "pnpm run build:decl --watch",
     "build": "concurrently pnpm:build:cjs pnpm:build:mjs",
