@@ -24,9 +24,11 @@ test('There are a correct number of items', () => {
 
 test('Each item has 7 elements', () => {
   codes.items.forEach((item) => {
-    expect(item).toBeInstanceOf(Array);
+    // https://stackoverflow.com/questions/76007003/jest-tobeinstanceof-expected-constructor-array-received-constructor-array
+    // expect(item).toBeInstanceOf(Array);
+    expect(Array.isArray(item)).toBeTruthy();
     expect(item.length).toBe(7);
-  })
+  });
 });
 
 test('Each item has 7 non-empty elements', () => {
