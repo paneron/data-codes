@@ -1,6 +1,6 @@
 {
   "name": "@paneron/iso639-codes",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Codes for ISO 639",
   "scripts": {
     "prepare": "ts-patch install -s",
