@@ -7,6 +7,7 @@
     "preinstall": "npx only-allow pnpm",
     "diagnose": "tsc --diagnostics --project tsconfig.decl.json",
     "typecheck": "tsc --noEmit",
+    "extract-codes": "ts-node --project tsconfig.dev.json scripts/extract_codes.ts",
     "build:decl": "tsc --project tsconfig.decl.json",
     "build:decl:watch": "pnpm run build:decl --watch",
     "build": "concurrently pnpm:build:cjs pnpm:build:mjs",
@@ -64,7 +65,8 @@
     "@swc/jest": "^0.2.36",
     "@types/jest": "^29.5.12",
     "jest": "^29.7.0",
-    "ts-jest": "^29.2.4"
+    "ts-jest": "^29.2.4",
+    "ts-node": "^10.9.2"
   },
   "keywords": [],
   "author": "",
